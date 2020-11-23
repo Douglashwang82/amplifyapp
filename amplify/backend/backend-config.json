@@ -8,7 +8,7 @@
     }
   },
   "api": {
-    "noteapp": {
+    "notesapp": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -23,6 +23,12 @@
           "additionalAuthenticationProviders": []
         }
       }
+    }
+  },
+  "storage": {
+    "imagestorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
     }
   }
 }
