@@ -23,6 +23,7 @@ export const listTodos = /* GraphQL */ `
         id
         name
         description
+        image
         createdAt
         updatedAt
       }

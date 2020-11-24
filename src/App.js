@@ -27,16 +27,16 @@ function App() {
       }
       return note;
     }))
-    setNotes(apiData.data.listTodos.items);
+    setNotes(notesFromAPI);
   }
 
   async function createNote() {
     if (!formData.name || !formData.description) return;
-    await API.graphql({ query: createNoteMutation, variables: { input: formData } });
     if (formData.image) {
       const image = await Storage.get(formData.image);
       formData.image = image;
     }
+    await API.graphql({ query: createNoteMutation, variables: { input: formData } });
     setNotes([...notes, formData]);
     setFormData(initialFormState);
   }
@@ -60,7 +60,8 @@ function App() {
     <div className="App">
       <h1>Travel Mission</h1>
       <div class='container'>
-        <div>
+      <h2>AddMission</h2>
+        <div class = "inputfield">
           <label>Topic of Mission: </label>
 
 
@@ -70,7 +71,7 @@ function App() {
             value={formData.name}
           />
         </div>
-        <div>
+        <div class = "inputfield">
           <label>Steps: </label>
           <input
             onChange={e => setFormData({ ...formData, 'description': e.target.value })}
@@ -85,25 +86,34 @@ function App() {
             onChange={onChange}
           />
         </div>
-        <div>
-          <button onClick={createNote}>Create Note</button>
+        <div class = "inputfield">
+          <button onClick={createNote}>Create Mission</button>
         </div>
       </div>
+
       <div style={{ marginBottom: 30 }}>
+      <h2>All Posts</h2>
         {
           notes.map(note => (
-            <div key={note.id || note.name}>
+            <div class = "container">
+            <div class = "post" key={note.id || note.name}>
               <h2>{note.name}</h2>
               <p>{note.description}</p>
               
               {
+                // eslint-disable-next-line
                 note.image && <img src={note.image} style={{ width: 400 }} />
               }
-              <button onClick={() => deleteNote(note)}>Delete note</button>
+              <button onClick={() => deleteNote(note)}>Delete Mission</button>
+            </div>
             </div>
           ))
         }
       </div>
+
+
+      {/* Feature post */}
+      
       <AmplifySignOut />
     </div>
   );
