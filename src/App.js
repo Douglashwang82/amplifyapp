@@ -4,7 +4,7 @@ import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listTodos } from './graphql/queries';
 import { createTodo as createNoteMutation, deleteTodo as deleteNoteMutation } from './graphql/mutations';
-
+import { onCreateTodo } from './graphql/subscriptions';
 import { API, Storage } from 'aws-amplify';
 
 const initialFormState = { name: '', description: '' }
@@ -32,11 +32,11 @@ function App() {
 
   async function createNote() {
     if (!formData.name || !formData.description) return;
+    await API.graphql({ query: createNoteMutation, variables: { input: formData } });
     if (formData.image) {
       const image = await Storage.get(formData.image);
       formData.image = image;
     }
-    await API.graphql({ query: createNoteMutation, variables: { input: formData } });
     setNotes([...notes, formData]);
     setFormData(initialFormState);
   }
@@ -51,7 +51,8 @@ function App() {
   async function onChange(e) {
     if (!e.target.files[0]) return
     const file = e.target.files[0];
-    setFormData({ ...formData, image: file.name });
+    formData.image = file.name
+    setFormData({ ...formData});
     await Storage.put(file.name, file);
     fetchNotes();
   }
