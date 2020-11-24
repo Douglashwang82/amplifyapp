@@ -19,7 +19,7 @@ function App() {
 
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listTodos });
-    const notesFromAPI = apiData.data.listNotes.items;
+    const notesFromAPI = apiData.data.listTodos.items;
     await Promise.all(notesFromAPI.map(async note => {
       if (note.image) {
         const image = await Storage.get(note.image);
@@ -27,7 +27,7 @@ function App() {
       }
       return note;
     }))
-    setNotes(apiData.data.listNotes.items);
+    setNotes(apiData.data.listTodos.items);
   }
 
   async function createNote() {
@@ -37,14 +37,14 @@ function App() {
       const image = await Storage.get(formData.image);
       formData.image = image;
     }
-    setNotes([ ...notes, formData ]);
+    setNotes([...notes, formData]);
     setFormData(initialFormState);
   }
 
   async function deleteNote({ id }) {
     const newNotesArray = notes.filter(note => note.id !== id);
     setNotes(newNotesArray);
-    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } }});
+    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } } });
   }
 
   //image
@@ -55,40 +55,54 @@ function App() {
     await Storage.put(file.name, file);
     fetchNotes();
   }
-
+  //------------------------------------------------------------------HTML
   return (
     <div className="App">
-      <h1>My Notes App</h1>
-      <input
-        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
-        placeholder="Note name"
-        value={formData.name}
-      />
-      <input
-        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
-        placeholder="Note description"
-        value={formData.description}
-      />
+      <h1>Travel Mission</h1>
+      <div class='container'>
+        <div>
+          <label>Topic of Mission: </label>
 
-<input
-  type="file"
-  onChange={onChange}
-/>
 
-      <button onClick={createNote}>Create Note</button>
-      <div style={{marginBottom: 30}}>
-      {
-  notes.map(note => (
-    <div key={note.id || note.name}>
-      <h2>{note.name}</h2>
-      <p>{note.description}</p>
-      <button onClick={() => deleteNote(note)}>Delete note</button>
-      {
-        note.image && <img src={note.image} style={{width: 400}} />
-      }
-    </div>
-  ))
-}
+          <input
+            onChange={e => setFormData({ ...formData, 'name': e.target.value })}
+            placeholder="Note name"
+            value={formData.name}
+          />
+        </div>
+        <div>
+          <label>Steps: </label>
+          <input
+            onChange={e => setFormData({ ...formData, 'description': e.target.value })}
+            placeholder="Note description"
+            value={formData.description}
+          />
+        </div>
+        <div>
+          <label>Image: </label>
+          <input
+            type="file"
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <button onClick={createNote}>Create Note</button>
+        </div>
+      </div>
+      <div style={{ marginBottom: 30 }}>
+        {
+          notes.map(note => (
+            <div key={note.id || note.name}>
+              <h2>{note.name}</h2>
+              <p>{note.description}</p>
+              
+              {
+                note.image && <img src={note.image} style={{ width: 400 }} />
+              }
+              <button onClick={() => deleteNote(note)}>Delete note</button>
+            </div>
+          ))
+        }
       </div>
       <AmplifySignOut />
     </div>
