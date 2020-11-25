@@ -4,18 +4,21 @@ import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listTodos } from './graphql/queries';
 import { createTodo as createNoteMutation, deleteTodo as deleteNoteMutation } from './graphql/mutations';
-import { onCreateTodo } from './graphql/subscriptions';
+//import { onCreateTodo } from './graphql/subscriptions';
 import { API, Storage } from 'aws-amplify';
-
-const initialFormState = { name: '', description: '' }
+import {Auth } from 'aws-amplify';
+const initialFormState = { name: '', description: '', city:'Taipei'}
 
 function App() {
+  
+  const [username, setUser] = useState(Auth.user.username);
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
     fetchNotes();
   }, []);
+
 
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listTodos });
@@ -60,19 +63,27 @@ function App() {
   return (
     <div className="App">
       <h1>Travel Mission</h1>
-      <div class='container'>
+      <h2> Username: {username}</h2>
+      <div className='container'>
       <h2>AddMission</h2>
-        <div class = "inputfield">
+        <div className = "inputfield">
           <label>Topic of Mission: </label>
-
-
           <input
             onChange={e => setFormData({ ...formData, 'name': e.target.value })}
             placeholder="Note name"
             value={formData.name}
           />
         </div>
-        <div class = "inputfield">
+        <div className = "inputfield">
+          <label>City: </label>
+          <select name = "citys" id = "citys" defaultValue = "California" 
+          onChange={e => setFormData({ ...formData, 'city': e.target.value })}>
+            <option>Taipei</option>
+            <option>California</option>
+            <option>Kingmen</option>
+          </select>
+        </div>
+        <div className = "inputfield">
           <label>Steps: </label>
           <input
             onChange={e => setFormData({ ...formData, 'description': e.target.value })}
@@ -87,7 +98,7 @@ function App() {
             onChange={onChange}
           />
         </div>
-        <div class = "inputfield">
+        <div className = "inputfield">
           <button onClick={createNote}>Create Mission</button>
         </div>
       </div>
@@ -96,10 +107,11 @@ function App() {
       <h2>All Posts</h2>
         {
           notes.map(note => (
-            <div class = "container">
-            <div class = "post" key={note.id || note.name}>
-              <h2>{note.name}</h2>
-              <p>{note.description}</p>
+            <div className = "container">
+            <div className = "post" key={note.id || note.name}>
+              <h2>Topic: {note.name}</h2>
+              <p>City: {note.city}</p>
+              <p>Steps: {note.description}</p>
               
               {
                 // eslint-disable-next-line

@@ -9,6 +9,7 @@ export const createTodo = /* GraphQL */ `
     createTodo(input: $input, condition: $condition) {
       id
       name
+      city
       description
       image
       createdAt
@@ -24,6 +25,7 @@ export const updateTodo = /* GraphQL */ `
     updateTodo(input: $input, condition: $condition) {
       id
       name
+      city
       description
       image
       createdAt
@@ -39,6 +41,7 @@ export const deleteTodo = /* GraphQL */ `
     deleteTodo(input: $input, condition: $condition) {
       id
       name
+      city
       description
       image
       createdAt
