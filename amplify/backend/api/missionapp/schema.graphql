@@ -5,3 +5,10 @@ type Todo @model {
   description: String
   image: String
 }
+
+type Users @model {
+  id: ID!
+  mission_id: String!
+  mission_topic: String!
+  percentage: Int!
+}

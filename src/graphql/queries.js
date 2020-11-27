@@ -34,3 +34,34 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
+export const getUsers = /* GraphQL */ `
+  query GetUsers($id: ID!) {
+    getUsers(id: $id) {
+      id
+      mission_id
+      mission_topic
+      percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUserss = /* GraphQL */ `
+  query ListUserss(
+    $filter: ModelUsersFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        mission_id
+        mission_topic
+        percentage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

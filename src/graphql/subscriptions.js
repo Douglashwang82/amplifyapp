@@ -40,3 +40,39 @@ export const onDeleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateUsers = /* GraphQL */ `
+  subscription OnCreateUsers {
+    onCreateUsers {
+      id
+      mission_id
+      mission_topic
+      percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUsers = /* GraphQL */ `
+  subscription OnUpdateUsers {
+    onUpdateUsers {
+      id
+      mission_id
+      mission_topic
+      percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUsers = /* GraphQL */ `
+  subscription OnDeleteUsers {
+    onDeleteUsers {
+      id
+      mission_id
+      mission_topic
+      percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
