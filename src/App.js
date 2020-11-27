@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 //import { API } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { listTodos, listUserss } from './graphql/queries';
-import { createTodo as createNoteMutation, deleteTodo as deleteNoteMutation } from './graphql/mutations';
+import { listNotes, listUserms } from './graphql/queries';
+import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
 //import { onCreateTodo } from './graphql/subscriptions';
 import { API, Storage } from 'aws-amplify';
 import {Auth } from 'aws-amplify';
 //User mission
-import { createUsers  as createUsersNoteMutation, deleteUsers as deleteUsersNoteMutation, updateUsers as updateUsersNoteMutation} from './graphql/mutations';
+import { createUserm  as createUsermNoteMutation, deleteUserm as deleteUsermNoteMutation, updateUserm as updateUsermNoteMutation} from './graphql/mutations';
 const initialFormState = { name: '', description: '', city:'Taipei'}
 
 
@@ -19,16 +19,16 @@ function App() {
   const [formData, setFormData] = useState(initialFormState);
 
   // User notes
-  const [userNotes, setUsersNotes] = useState([]);
+  const [userNotes, setUsermNotes] = useState([]);
   useEffect(() => {
     fetchNotes();
-    fetchUsersNote();
+    fetchUsermNote();
   }, []);
 
 
   async function fetchNotes() {
-    const apiData = await API.graphql({ query: listTodos });
-    const notesFromAPI = apiData.data.listTodos.items;
+    const apiData = await API.graphql({ query: listNotes });
+    const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(notesFromAPI.map(async note => {
       if (note.image) {
         const image = await Storage.get(note.image);
@@ -52,6 +52,7 @@ function App() {
 
   async function deleteNote({ id }) {
     const newNotesArray = notes.filter(note => note.id !== id);
+    console.log(id);
     setNotes(newNotesArray);
     await API.graphql({ query: deleteNoteMutation, variables: { input: { id } } });
   }
@@ -68,36 +69,38 @@ function App() {
 
 
   //save into user database
-  async function fetchUsersNote() {
-    const apiData = await API.graphql({ query: listUserss });
-    const notesFromAPI = apiData.data.listUserss.items;
+  async function fetchUsermNote() {
+    const apiData = await API.graphql({ query: listUserms });
+    const notesFromAPI = apiData.data.listUserms.items;
     setNotes(notesFromAPI);
   }
   
-  async function createUsersNote( { id , name}) {
+  async function createUsermNote( { id , name}) {
     console.log(name);
     let noteinfo = {
         mission_id: id,
         mission_topic: name,
         percentage: 0
       }
-    await API.graphql({ query: createUsersNoteMutation, variables: { input: noteinfo } });
-    setUsersNotes([...userNotes, noteinfo]);
+    console.log("h")
+    await API.graphql({ query: createUsermNoteMutation, variables: { input: noteinfo } });
+    console.log("s")
+    setUsermNotes([...userNotes, noteinfo]);
   }
 
-  async function deleteUsersNote( {id }) {
-    const newUsersNotesArray = userNotes.filter(note => note.id !== id);
-    setUsersNotes(newUsersNotesArray);
-    await API.graphql({ query: deleteUsersNoteMutation, variables: { input: { id } } });
+  async function deleteUsermNote( {id }) {
+    const newUsermNotesArray = userNotes.filter(note => note.id !== id);
+    setUsermNotes(newUsermNotesArray);
+    await API.graphql({ query: deleteUsermNoteMutation, variables: { input: { id } } });
   }
   
-  async function updateUsersNote( { id , per}) {
+  async function updateUsermNote( { id , per}) {
     let formData = {
       id: id,
       percentage:per
     }
-    await API.graphql({ query: updateUsersNoteMutation, variables: { id, input: formData } });
-    fetchUsersNote();
+    await API.graphql({ query: updateUsermNoteMutation, variables: { id, input: formData } });
+    fetchUsermNote();
   }
 
   //------------------------------------------------------------------HTML
@@ -153,13 +156,14 @@ function App() {
               <h2>Topic: {note.name}</h2>
               <p>City: {note.city}</p>
               <p>Steps: {note.description}</p>
+              <p>Mission Id: {note.id}</p>
               
               {
                 // eslint-disable-next-line
                 note.image && <img src={note.image} style={{ width: 400 }} />
               }
               <button onClick={() => deleteNote(note)}>Delete Mission</button>
-              <button onClick={() => createUsersNote(note)}>Add Mission</button>
+              <button onClick={() => createUsermNote(note)}>Add Mission</button>
             </div>
             </div>
           ))
@@ -179,7 +183,7 @@ function App() {
               <p>id: {note.id}</p>
               <p>mission_id: {note.mission_id}</p>
               <p>Complete rate: {note.percentage} %</p>
-              <button onClick={() => deleteUsersNote(note)}>Delete Mission</button>
+              <button onClick={() => deleteUsermNote(note)}>Delete Mission</button>
             </div>
             </div>
           ))

@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo {
-    onCreateTodo {
+export const onCreateNote = /* GraphQL */ `
+  subscription OnCreateNote {
+    onCreateNote {
       id
       name
       city
@@ -14,9 +14,9 @@ export const onCreateTodo = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo {
-    onUpdateTodo {
+export const onUpdateNote = /* GraphQL */ `
+  subscription OnUpdateNote {
+    onUpdateNote {
       id
       name
       city
@@ -27,9 +27,9 @@ export const onUpdateTodo = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo {
-    onDeleteTodo {
+export const onDeleteNote = /* GraphQL */ `
+  subscription OnDeleteNote {
+    onDeleteNote {
       id
       name
       city
@@ -40,9 +40,9 @@ export const onDeleteTodo = /* GraphQL */ `
     }
   }
 `;
-export const onCreateUsers = /* GraphQL */ `
-  subscription OnCreateUsers {
-    onCreateUsers {
+export const onCreateUserm = /* GraphQL */ `
+  subscription OnCreateUserm {
+    onCreateUserm {
       id
       mission_id
       mission_topic
@@ -52,9 +52,9 @@ export const onCreateUsers = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateUsers = /* GraphQL */ `
-  subscription OnUpdateUsers {
-    onUpdateUsers {
+export const onUpdateUserm = /* GraphQL */ `
+  subscription OnUpdateUserm {
+    onUpdateUserm {
       id
       mission_id
       mission_topic
@@ -64,9 +64,9 @@ export const onUpdateUsers = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteUsers = /* GraphQL */ `
-  subscription OnDeleteUsers {
-    onDeleteUsers {
+export const onDeleteUserm = /* GraphQL */ `
+  subscription OnDeleteUserm {
+    onDeleteUserm {
       id
       mission_id
       mission_topic

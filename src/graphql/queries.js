@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTodo = /* GraphQL */ `
-  query GetTodo($id: ID!) {
-    getTodo(id: $id) {
+export const getNote = /* GraphQL */ `
+  query GetNote($id: ID!) {
+    getNote(id: $id) {
       id
       name
       city
@@ -14,13 +14,13 @@ export const getTodo = /* GraphQL */ `
     }
   }
 `;
-export const listTodos = /* GraphQL */ `
-  query ListTodos(
-    $filter: ModelTodoFilterInput
+export const listNotes = /* GraphQL */ `
+  query ListNotes(
+    $filter: ModelNoteFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
@@ -34,9 +34,9 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
-export const getUsers = /* GraphQL */ `
-  query GetUsers($id: ID!) {
-    getUsers(id: $id) {
+export const getUserm = /* GraphQL */ `
+  query GetUserm($id: ID!) {
+    getUserm(id: $id) {
       id
       mission_id
       mission_topic
@@ -46,13 +46,13 @@ export const getUsers = /* GraphQL */ `
     }
   }
 `;
-export const listUserss = /* GraphQL */ `
-  query ListUserss(
-    $filter: ModelUsersFilterInput
+export const listUserms = /* GraphQL */ `
+  query ListUserms(
+    $filter: ModelUsermFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUserss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUserms(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         mission_id

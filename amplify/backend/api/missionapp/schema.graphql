@@ -1,4 +1,4 @@
-type Todo @model {
+type Note @model {
   id: ID!
   name: String!
   city:String!
@@ -6,7 +6,7 @@ type Todo @model {
   image: String
 }
 
-type Users @model {
+type Userm @model {
   id: ID!
   mission_id: String!
   mission_topic: String!

@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createNote = /* GraphQL */ `
+  mutation CreateNote(
+    $input: CreateNoteInput!
+    $condition: ModelNoteConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createNote(input: $input, condition: $condition) {
       id
       name
       city
@@ -17,12 +17,12 @@ export const createTodo = /* GraphQL */ `
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateNote = /* GraphQL */ `
+  mutation UpdateNote(
+    $input: UpdateNoteInput!
+    $condition: ModelNoteConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateNote(input: $input, condition: $condition) {
       id
       name
       city
@@ -33,12 +33,12 @@ export const updateTodo = /* GraphQL */ `
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteNote = /* GraphQL */ `
+  mutation DeleteNote(
+    $input: DeleteNoteInput!
+    $condition: ModelNoteConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteNote(input: $input, condition: $condition) {
       id
       name
       city
@@ -49,12 +49,12 @@ export const deleteTodo = /* GraphQL */ `
     }
   }
 `;
-export const createUsers = /* GraphQL */ `
-  mutation CreateUsers(
-    $input: CreateUsersInput!
-    $condition: ModelUsersConditionInput
+export const createUserm = /* GraphQL */ `
+  mutation CreateUserm(
+    $input: CreateUsermInput!
+    $condition: ModelUsermConditionInput
   ) {
-    createUsers(input: $input, condition: $condition) {
+    createUserm(input: $input, condition: $condition) {
       id
       mission_id
       mission_topic
@@ -64,12 +64,12 @@ export const createUsers = /* GraphQL */ `
     }
   }
 `;
-export const updateUsers = /* GraphQL */ `
-  mutation UpdateUsers(
-    $input: UpdateUsersInput!
-    $condition: ModelUsersConditionInput
+export const updateUserm = /* GraphQL */ `
+  mutation UpdateUserm(
+    $input: UpdateUsermInput!
+    $condition: ModelUsermConditionInput
   ) {
-    updateUsers(input: $input, condition: $condition) {
+    updateUserm(input: $input, condition: $condition) {
       id
       mission_id
       mission_topic
@@ -79,12 +79,12 @@ export const updateUsers = /* GraphQL */ `
     }
   }
 `;
-export const deleteUsers = /* GraphQL */ `
-  mutation DeleteUsers(
-    $input: DeleteUsersInput!
-    $condition: ModelUsersConditionInput
+export const deleteUserm = /* GraphQL */ `
+  mutation DeleteUserm(
+    $input: DeleteUsermInput!
+    $condition: ModelUsermConditionInput
   ) {
-    deleteUsers(input: $input, condition: $condition) {
+    deleteUserm(input: $input, condition: $condition) {
       id
       mission_id
       mission_topic
