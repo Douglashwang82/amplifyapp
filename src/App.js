@@ -72,7 +72,7 @@ function App() {
   async function fetchUsermNote() {
     const apiData = await API.graphql({ query: listUserms });
     const notesFromAPI = apiData.data.listUserms.items;
-    setNotes(notesFromAPI);
+    setUsermNotes(notesFromAPI);
   }
   
   async function createUsermNote( { id , name}) {
