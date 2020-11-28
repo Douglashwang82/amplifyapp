@@ -8,7 +8,15 @@ type Note @model {
 
 type Userm @model {
   id: ID!
-  mission_id: String!
-  mission_topic: String!
-  percentage: Int!
+  mission_id: String
+  mission_topic: String
+  percentage: String
+}
+
+type Goal @model {
+  id: ID!
+  name: String!
+  mission_id: [String]
+  mission_topic: [String]
+  percentage: String
 }

@@ -65,3 +65,36 @@ export const listUserms = /* GraphQL */ `
     }
   }
 `;
+export const getGoal = /* GraphQL */ `
+  query GetGoal($id: ID!) {
+    getGoal(id: $id) {
+      id
+      name
+      mission_id
+      mission_topic
+      percentage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listGoals = /* GraphQL */ `
+  query ListGoals(
+    $filter: ModelGoalFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGoals(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        mission_id
+        mission_topic
+        percentage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
